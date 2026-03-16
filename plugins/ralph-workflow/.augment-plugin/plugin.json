@@ -1,0 +1,30 @@
+{
+  "name": "ralph-workflow",
+  "description": "Autonomous specs-based development workflow with specialized subagents. Execute complete features from spec to implementation with explore, plan, implement, and review phases. Includes circuit breaker for stuck detection and Basic Memory integration. Requires: basic-memory and git MCP servers, knowledge-capture plugin.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Matt Niedelman"
+  },
+  "keywords": [
+    "autonomous",
+    "subagents",
+    "specs",
+    "tdd",
+    "development",
+    "workflow"
+  ],
+  "attribution": {
+    "basedOn": "obra/superpowers",
+    "url": "https://github.com/obra/superpowers",
+    "license": "MIT",
+    "skills": [
+      "brainstorming",
+      "using-git-worktrees",
+      "writing-plans",
+      "executing-plans",
+      "subagent-driven-development",
+      "finishing-a-development-branch"
+    ],
+    "modifications": "Integrated with Basic Memory, added AI-centric worktree framing, condensed content"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "code-quality",
+  "description": "Automatic linting with ast-grep/ruff/ty, code review patterns, desloppify health scoring, and refactoring agents. Hooks run on every file edit.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Matt Niedelman"
+  },
+  "keywords": [
+    "linting",
+    "review",
+    "quality",
+    "ast-grep",
+    "ruff",
+    "refactoring",
+    "health-score",
+    "desloppify",
+    "hooks"
+  ],
+  "attribution": {
+    "basedOn": "obra/superpowers",
+    "url": "https://github.com/obra/superpowers",
+    "license": "MIT",
+    "skills": [
+      "requesting-code-review",
+      "receiving-code-review"
+    ],
+    "modifications": "Condensed content, integrated with desloppify workflow"
+  }
+}

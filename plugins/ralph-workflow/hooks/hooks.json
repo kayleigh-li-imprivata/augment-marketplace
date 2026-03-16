@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "sub-agent-ralph-.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/ralph_monitor.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

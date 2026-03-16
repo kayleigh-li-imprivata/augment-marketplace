@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp:.*_git$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/git_working_dir_check.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp:git_commit_git",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/worktree_commit_guard.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp:.*_git$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/git_session_recovery.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "toolPermissions": [
+    {
+      "toolName": "mcp:git_commit_git",
+      "permission": {
+        "type": "script-policy",
+        "script": "${AUGMENT_PLUGIN_ROOT}/hooks/git_commit_policy.sh"
+      }
+    },
+    {
+      "toolName": "launch-process",
+      "permission": {
+        "type": "deny"
+      },
+      "shellInputRegex": "\\bgit\\s+(add|commit|push|pull|merge|rebase|reset|checkout|branch|stash|cherry-pick|revert|tag|fetch|clone|init|remote|config|diff|log|status|show)\\b"
+    }
+  ]
+}

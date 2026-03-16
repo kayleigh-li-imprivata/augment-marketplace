@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "save-file|str-replace-editor",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/validate_skill.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ast-grep": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/ast-grep/ast-grep-mcp",
+        "ast-grep-server"
+      ],
+      "_comment": "Requires uvx (from uv). Install uv: curl -LsSf https://astral.sh/uv/install.sh | sh"
+    }
+  }
+}

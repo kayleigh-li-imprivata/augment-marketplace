@@ -1,0 +1,61 @@
+{
+  "mcpServers": {
+    "grafana": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@grafana/mcp-grafana"
+      ],
+      "env": {
+        "GRAFANA_URL": "${GRAFANA_URL}",
+        "GRAFANA_API_KEY": "${GRAFANA_API_KEY}"
+      }
+    },
+    "prometheus-nonprod": {
+      "command": "uvx",
+      "args": [
+        "prometheus-mcp-server"
+      ],
+      "env": {
+        "PROMETHEUS_URL": "${PROMETHEUS_NONPROD_URL:-http://localhost:9090}"
+      }
+    },
+    "prometheus-prod": {
+      "command": "uvx",
+      "args": [
+        "prometheus-mcp-server"
+      ],
+      "env": {
+        "PROMETHEUS_URL": "${PROMETHEUS_PROD_URL:-http://localhost:9091}"
+      }
+    }
+  },
+  "config": {
+    "GRAFANA_URL": {
+      "type": "url",
+      "required": true,
+      "description": "Grafana instance URL (e.g., https://grafana.example.com)",
+      "setup": "Get from your Grafana instance"
+    },
+    "GRAFANA_API_KEY": {
+      "type": "secret",
+      "required": true,
+      "description": "Grafana API key with Viewer or Editor role",
+      "setup": "Create at Grafana > Configuration > API Keys"
+    },
+    "PROMETHEUS_NONPROD_URL": {
+      "type": "url",
+      "required": false,
+      "description": "Non-production Prometheus URL. For AWS AMP, use local SigV4 proxy.",
+      "default": "http://localhost:9090",
+      "setup": "See README for AWS AMP SigV4 proxy setup"
+    },
+    "PROMETHEUS_PROD_URL": {
+      "type": "url",
+      "required": false,
+      "description": "Production Prometheus URL. For AWS AMP, use local SigV4 proxy.",
+      "default": "http://localhost:9091",
+      "setup": "See README for AWS AMP SigV4 proxy setup"
+    }
+  }
+}

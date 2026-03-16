@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "launch-process",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/pip_to_uv.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+

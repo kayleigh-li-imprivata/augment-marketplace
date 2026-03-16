@@ -1,0 +1,35 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "save-file|str-replace-editor|mcp:^(write|edit|save|replace|insert)_",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/ascii_check.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "save-file|str-replace-editor|mcp:^(write|edit|save|replace|insert)_",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/ascii_check.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "save-file|str-replace-editor|mcp:^(write|edit|save|replace|insert)_",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${AUGMENT_PLUGIN_ROOT}/hooks/auto_lint.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "observability",
+  "description": "Observability patterns and MCP integrations for Grafana dashboards and Prometheus metrics. Query metrics, create dashboards, and debug production systems.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Matt Niedelman"
+  },
+  "keywords": [
+    "observability",
+    "grafana",
+    "prometheus",
+    "metrics",
+    "dashboards",
+    "monitoring",
+    "alerting"
+  ]
+}
+

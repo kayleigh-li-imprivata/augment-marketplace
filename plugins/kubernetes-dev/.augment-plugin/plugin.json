@@ -1,0 +1,17 @@
+{
+  "name": "kubernetes-dev",
+  "description": "Kubernetes development patterns including Helm chart authoring (with critical namespace rules), Argo Workflows with Hera Python SDK, and EAM/OneSign integration patterns. Requires: helm, kubectl CLI tools.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Matt Niedelman"
+  },
+  "keywords": [
+    "kubernetes",
+    "helm",
+    "argo",
+    "hera",
+    "k8s",
+    "charts",
+    "workflows"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "basic-memory": {
+      "command": "uvx",
+      "args": [
+        "basic-memory",
+        "mcp"
+      ]
+    },
+    "think-strategies": {
+      "command": "npx",
+      "args": [
+        "github:aaronsb/think-strategies"
+      ]
+    }
+  }
+}
