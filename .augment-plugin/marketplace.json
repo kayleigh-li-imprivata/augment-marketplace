@@ -1,0 +1,100 @@
+{
+  "name": "kayleigh-li-imprivata",
+  "description": "Kayleigh's Augment CLI marketplace - Production-tested plugins for autonomous workflows, code quality, knowledge capture, and more.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Kayleigh Li",
+    "url": "https://github.com/kayleigh-li-imprivata"
+  },
+  "repository": "https://github.com/kayleigh-li-imprivata/augment-marketplace",
+  "plugins": [
+    {
+      "name": "ralph-workflow",
+      "description": "Autonomous specs-based development with specialized subagents for explore, plan, implement, and review phases",
+      "version": "1.0.0",
+      "source": "./plugins/ralph-workflow",
+      "category": "workflow",
+      "tags": ["autonomous", "subagents", "specs", "tdd", "development"]
+    },
+    {
+      "name": "knowledge-capture",
+      "description": "Basic Memory integration with session lifecycle hooks, conversation continuity, and knowledge organization",
+      "version": "1.0.0",
+      "source": "./plugins/knowledge-capture",
+      "category": "productivity",
+      "tags": ["basic-memory", "notes", "knowledge-graph", "session", "continuity", "hooks"]
+    },
+    {
+      "name": "research",
+      "description": "Research and investigation skills including STORM methodology, deep dives, brainstorming, and structured thinking",
+      "version": "1.0.0",
+      "source": "./plugins/research",
+      "category": "research",
+      "tags": ["research", "storm", "deep-dive", "brainstorming", "thinking", "analysis"]
+    },
+    {
+      "name": "git-workflow",
+      "description": "Git conventions, MCP enforcement, conventional commits, and commit policies",
+      "version": "1.0.0",
+      "source": "./plugins/git-workflow",
+      "category": "workflow",
+      "tags": ["git", "commits", "mcp", "policies", "hooks"]
+    },
+    {
+      "name": "tdd-workflow",
+      "description": "Test-driven development patterns with systematic debugging and verification",
+      "version": "1.0.0",
+      "source": "./plugins/tdd-workflow",
+      "category": "testing",
+      "tags": ["tdd", "testing", "debugging", "verification", "pytest"]
+    },
+    {
+      "name": "code-quality",
+      "description": "Automatic linting with ast-grep/ruff/ty, code review patterns, desloppify health scoring, and refactoring agents",
+      "version": "1.0.0",
+      "source": "./plugins/code-quality",
+      "category": "code-quality",
+      "tags": ["linting", "ast-grep", "ruff", "review", "quality", "refactoring", "hooks"]
+    },
+    {
+      "name": "python-dev",
+      "description": "Python development patterns including FastAPI, observability, and modern practices",
+      "version": "1.0.0",
+      "source": "./plugins/python-dev",
+      "category": "development",
+      "tags": ["python", "fastapi", "observability", "api", "patterns"]
+    },
+    {
+      "name": "kubernetes-dev",
+      "description": "Helm charts, Argo Workflows with Hera SDK, and Kubernetes patterns",
+      "version": "1.0.0",
+      "source": "./plugins/kubernetes-dev",
+      "category": "infrastructure",
+      "tags": ["kubernetes", "helm", "argo", "hera", "k8s"]
+    },
+    {
+      "name": "core",
+      "description": "Core development rules and skills - response style, security, documentation, parallel agents, and task management",
+      "version": "1.0.0",
+      "source": "./plugins/core",
+      "category": "core",
+      "tags": ["core", "rules", "security", "style", "tasks", "documentation"]
+    },
+    {
+      "name": "meta",
+      "description": "Tools for managing Augment CLI itself - config management, ToolHive, skill authoring, ast-grep rules, and validation",
+      "version": "1.0.0",
+      "source": "./plugins/meta",
+      "category": "tooling",
+      "tags": ["meta", "augment", "config", "toolhive", "mcp", "ast-grep", "skills"]
+    },
+    {
+      "name": "observability",
+      "description": "Observability patterns with Grafana and Prometheus MCP integrations for metrics, dashboards, and monitoring",
+      "version": "1.0.0",
+      "source": "./plugins/observability",
+      "category": "infrastructure",
+      "tags": ["observability", "grafana", "prometheus", "metrics", "monitoring", "dashboards"]
+    }
+  ]
+}
