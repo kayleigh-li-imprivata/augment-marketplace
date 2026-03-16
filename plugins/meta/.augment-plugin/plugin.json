@@ -3,7 +3,7 @@
   "description": "Tools for managing Augment CLI itself - config management, ToolHive MCP servers, writing skills, ast-grep rules, and skill validation.",
   "version": "1.0.0",
   "author": {
-    "name": "Matt Niedelman"
+    "name": "Kayleigh Li"
   },
   "keywords": [
     "meta",

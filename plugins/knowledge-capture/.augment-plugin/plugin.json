@@ -3,7 +3,7 @@
   "description": "Basic Memory integration for capturing decisions, patterns, and knowledge. Includes session lifecycle hooks (context injection at start, notes reminder at end), conversation continuity, and knowledge organization.",
   "version": "1.0.0",
   "author": {
-    "name": "Matt Niedelman"
+    "name": "Kayleigh Li"
   },
   "keywords": [
     "basic-memory",

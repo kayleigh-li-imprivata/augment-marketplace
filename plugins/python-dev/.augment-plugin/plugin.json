@@ -3,7 +3,7 @@
   "description": "Python development patterns including FastAPI applications, observability with structured logging and metrics, API design, and modern Python practices with uv/poetry. Requires: uv or poetry CLI.",
   "version": "1.0.0",
   "author": {
-    "name": "Matt Niedelman"
+    "name": "Kayleigh Li"
   },
   "keywords": [
     "python",

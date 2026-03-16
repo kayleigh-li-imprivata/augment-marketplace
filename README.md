@@ -1,8 +1,7 @@
-# AI-Assisted Development Showcase
+# Kayleigh's Augment CLI Marketplace
 
-This is how I use AI for software development.
-A curated collection of my configurations, case studies, and patterns that have
-evolved over months of daily use.
+This is my personal Augment CLI marketplace with custom agents and configurations.
+Based on Matt Niedelman's showcase, customized for my workflow.
 
 ## Install My Plugins
 
@@ -11,12 +10,12 @@ Install plugins directly:
 
 ```bash
 # Add this marketplace (one-time)
-auggie plugin marketplace add imprivata-ai/matt-niedelman-imprivata
+auggie plugin marketplace add kayleigh-li-imprivata/augment-marketplace
 
 # Install plugins you want
-auggie plugin install core@matt-niedelman-imprivata              # Foundation (install first)
-auggie plugin install ralph-workflow@matt-niedelman-imprivata    # Autonomous development
-auggie plugin install knowledge-capture@matt-niedelman-imprivata # Basic Memory integration
+auggie plugin install core@kayleigh-li-imprivata              # Foundation (install first)
+auggie plugin install ralph-workflow@kayleigh-li-imprivata    # Autonomous development
+auggie plugin install knowledge-capture@kayleigh-li-imprivata # Basic Memory integration
 
 # Browse all available plugins interactively
 /plugins

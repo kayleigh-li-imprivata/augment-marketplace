@@ -3,7 +3,7 @@
   "description": "Git conventions and policies including conventional commits, branch naming, MCP server enforcement, commit authorization, and worktree-based development for isolated workspaces. Requires: git MCP server.",
   "version": "1.0.0",
   "author": {
-    "name": "Matt Niedelman"
+    "name": "Kayleigh Li"
   },
   "keywords": [
     "git",

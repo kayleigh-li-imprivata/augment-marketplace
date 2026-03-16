@@ -7,13 +7,13 @@ knowledge capture, and workflow automation.
 
 ```bash
 # Add this marketplace (from repo root)
-auggie plugin marketplace add imprivata-ai/matt-niedelman-imprivata
+auggie plugin marketplace add kayleigh-li-imprivata/augment-marketplace
 
 # Browse available plugins
 /plugins
 
 # Install a specific plugin
-auggie plugin install ralph-workflow@matt-niedelman-imprivata
+auggie plugin install ralph-workflow@kayleigh-li-imprivata
 ```
 
 ## Available Plugins

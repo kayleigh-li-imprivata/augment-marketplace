@@ -3,7 +3,7 @@
   "description": "Test-driven development patterns with systematic debugging techniques. Includes root cause tracing, condition-based waiting, and defense-in-depth strategies. No mocks allowed. Requires: pytest. Recommended: auto-lint plugin.",
   "version": "1.0.0",
   "author": {
-    "name": "Matt Niedelman"
+    "name": "Kayleigh Li"
   },
   "keywords": [
     "tdd",
