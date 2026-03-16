@@ -1,7 +1,7 @@
 {
   "name": "kayleigh-li-imprivata",
   "description": "Kayleigh's Augment CLI marketplace - Production-tested plugins for autonomous workflows, code quality, knowledge capture, and more.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Kayleigh Li",
     "url": "https://github.com/kayleigh-li-imprivata"
@@ -50,11 +50,11 @@
     },
     {
       "name": "code-quality",
-      "description": "Automatic linting with ast-grep/ruff/ty, code review patterns, desloppify health scoring, and refactoring agents",
-      "version": "1.0.0",
+      "description": "Automatic linting with ast-grep/ruff/ty, code review patterns, desloppify health scoring, and refactoring agents. Includes PR review, issue resolution, PR comment resolution, and CI failure diagnosis.",
+      "version": "1.1.0",
       "source": "./plugins/code-quality",
       "category": "code-quality",
-      "tags": ["linting", "ast-grep", "ruff", "review", "quality", "refactoring", "hooks"]
+      "tags": ["linting", "ast-grep", "ruff", "review", "quality", "refactoring", "hooks", "pr-review", "issue-resolver", "ci-diagnosis"]
     },
     {
       "name": "python-dev",

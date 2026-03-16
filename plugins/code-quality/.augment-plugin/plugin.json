@@ -1,9 +1,9 @@
 {
   "name": "code-quality",
-  "description": "Automatic linting with ast-grep/ruff/ty, code review patterns, desloppify health scoring, and refactoring agents. Hooks run on every file edit.",
-  "version": "1.0.0",
+  "description": "Automatic linting with ast-grep/ruff/ty, code review patterns, desloppify health scoring, and refactoring agents. Includes PR review, issue resolution, PR comment resolution, and CI failure diagnosis. Hooks run on every file edit.",
+  "version": "1.1.0",
   "author": {
-    "name": "Matt Niedelman"
+    "name": "Kayleigh Li"
   },
   "keywords": [
     "linting",
@@ -14,16 +14,15 @@
     "refactoring",
     "health-score",
     "desloppify",
-    "hooks"
+    "hooks",
+    "pr-review",
+    "issue-resolver",
+    "ci-diagnosis"
   ],
   "attribution": {
-    "basedOn": "obra/superpowers",
-    "url": "https://github.com/obra/superpowers",
+    "basedOn": "matt-niedelman-imprivata/code-quality",
+    "url": "https://github.com/imprivata-ai/matt-niedelman-imprivata",
     "license": "MIT",
-    "skills": [
-      "requesting-code-review",
-      "receiving-code-review"
-    ],
-    "modifications": "Condensed content, integrated with desloppify workflow"
+    "modifications": "Added PR code reviewer, issue resolver, PR comment resolver, and CI failure diagnoser agents. Renamed original code-reviewer to plan-reviewer."
   }
 }
