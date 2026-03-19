@@ -51,6 +51,22 @@ def setup_memory_symlinks() -> None:
         link.symlink_to(project_dir)
 
 
+def reindex_basic_memory() -> None:
+    """Reindex Basic Memory so newly pulled marketplace notes are searchable.
+
+    Runs silently — failures are suppressed to avoid blocking session start.
+    """
+    import subprocess
+    try:
+        subprocess.run(
+            ["uvx", "basic-memory", "reindex"],
+            capture_output=True,
+            timeout=60,
+        )
+    except Exception:
+        pass  # Non-fatal: user can run manually if needed
+
+
 def discover_agents() -> list[dict[str, str]]:
     """Scan agents directory and extract name/description from frontmatter."""
     agents = []
@@ -95,6 +111,7 @@ def format_agents_section(agents: list[dict[str, str]]) -> str:
 def main() -> None:
     """Inject project context at session start."""
     setup_memory_symlinks()
+    reindex_basic_memory()
     ctx = create_unified_context()
 
     if not isinstance(ctx, SessionStartContext):

@@ -5,6 +5,25 @@ Capture architectural decisions, patterns, and project-specific knowledge into
 the appropriate memory store, then commit and push to the marketplace repo so
 memory persists across machines.
 
+## ⚠️ Once-Per-Machine Setup (new machines only)
+
+After pulling the marketplace on a new machine, run these two commands once:
+
+```bash
+# Point Basic Memory MCP at the marketplace global memory path
+uvx basic-memory project move main ~/.augment/plugins/marketplaces/kayleigh-li-imprivata/memory/global
+
+# Index all existing notes
+uvx basic-memory reindex
+```
+
+After that, the session_start hook handles everything automatically on each
+session:
+- Symlinks `~/.augment/memory/{project}/` → marketplace project memory
+- Runs `uvx basic-memory reindex` so newly pulled notes are searchable
+
+---
+
 ## Memory Stores
 
 | Store | Location | When to use |
@@ -35,7 +54,9 @@ Parse the trigger phrase:
 ### Step 2: Summarize What to Capture
 
 Before writing anything, present a 3–5 sentence summary of what you're about
-to record and ask: "Does this accurately capture what you want to save? (yes/edit)"
+to record and ask:
+"Does this accurately capture what you want to save?
+(yes/edit)"
 
 Do not proceed until the user confirms.
 
@@ -75,9 +96,12 @@ tags:
 - relates-to [[{kebab-case-note}]]
 ```
 
-**CRITICAL**: Filenames and wikilinks MUST use kebab-case (e.g., `argocd-event-driven-promotion.md`, `[[argocd-notifications]]`).
+**CRITICAL**:
+Filenames and wikilinks MUST use kebab-case (e.g.,
+`argocd-event-driven-promotion.md`, `[[argocd-notifications]]`).
 
-**For Project Memory** — create `{kebab-case-title}.md` and add a one-line entry to `index.md`:
+**For Project Memory** — create `{kebab-case-title}.md` and add a one-line
+entry to `index.md`:
 
 ```markdown
 - [{Title}]({filename}.md) — {one-line summary}
@@ -99,7 +123,8 @@ git status
 git diff
 ```
 
-Present the diff to the user and ask: "Ready to commit and push to marketplace?"
+Present the diff to the user and ask:
+"Ready to commit and push to marketplace?"
 
 Do NOT proceed without explicit approval.
 
@@ -116,13 +141,14 @@ git push
 
 ### Step 7: Confirm
 
-Report: file path written, reindex result, and commit SHA.
+Report:
+file path written, reindex result, and commit SHA.
 
 ## Rules
 
 - Always ask for content confirmation before writing (Step 2)
 - Always ask for git approval before pushing (Step 5)
 - Never skip reindex for global memory notes
-- Never use CamelCase or snake_case in filenames or wikilinks — kebab-case only
+- Never use CamelCase or snake_case in filenames or wikilinks — kebab-case
+  only
 - Never create files outside the marketplace memory directories
-
