@@ -18,8 +18,7 @@ The trigger configuration is defined in `~/.augment/rules/agent-triggers.md`.
 
 ## Prerequisites
 - ✅ GitHub CLI (`gh`) is installed and authenticated
-- ✅ Repository:
-  `imprivata-ai/workstation-clustering`
+- ✅ Repository: **detected automatically from the current working directory**
 - ✅ Authentication already configured (verified working)
 
 ## Workflow
@@ -45,9 +44,13 @@ The trigger configuration is defined in `~/.augment/rules/agent-triggers.md`.
 When user says "Review PR #123" or "Review PR 123" or provides a PR URL:
 
 1. Parse the PR number from user input
-2. **Automatically fetch** PR metadata (no approval needed):
+2. **Detect the current repo** from the working directory (no approval needed):
    ```bash
-   gh pr view <number> --repo imprivata-ai/workstation-clustering --json title,author,body,url,headRefName,baseRefName,additions,deletions,changedFiles
+   REPO=$(gh repo view --json nameWithOwner -q '.nameWithOwner')
+   ```
+3. **Automatically fetch** PR metadata (no approval needed):
+   ```bash
+   gh pr view <number> --repo $REPO --json title,author,body,url,headRefName,baseRefName,additions,deletions,changedFiles
    ```
 
 ### Step 2: Fetch Changes and Existing Comments
@@ -67,21 +70,21 @@ git fetch origin
 
 Get the full diff:
 ```bash
-gh pr diff <number> --repo imprivata-ai/workstation-clustering
+gh pr diff <number> --repo $REPO
 ```
 
 Get list of changed files:
 ```bash
-gh pr view <number> --repo imprivata-ai/workstation-clustering --json files
+gh pr view <number> --repo $REPO --json files
 ```
 
 **Fetch existing comments to avoid duplicates:**
 ```bash
 # Get inline review comments (attached to specific lines)
-gh api /repos/imprivata-ai/workstation-clustering/pulls/<number>/comments
+gh api /repos/$REPO/pulls/<number>/comments
 
 # Get general PR comments (conversation tab)
-gh api /repos/imprivata-ai/workstation-clustering/issues/<number>/comments
+gh api /repos/$REPO/issues/<number>/comments
 ```
 
 Parse the comments to extract:
@@ -258,13 +261,13 @@ For each issue, create an inline comment attached to the specific line:
 
 ```bash
 # Get the latest commit SHA from the PR
-COMMIT_SHA=$(gh pr view <number> --repo imprivata-ai/workstation-clustering --json commits --jq '.commits[-1].oid')
+COMMIT_SHA=$(gh pr view <number> --repo $REPO --json commits --jq '.commits[-1].oid')
 
 # For each comment, submit as inline comment
 gh api \
   --method POST \
   -H "Accept: application/vnd.github+json" \
-  /repos/imprivata-ai/workstation-clustering/pulls/<number>/comments \
+  /repos/$REPO/pulls/<number>/comments \
   -f body="🟡 **MINOR**: Unreachable exception handler
 
 The function catches \`KeyError\` but \`Customers.__getitem__\` now raises \`CustomerNotFoundError\` instead.
@@ -276,7 +279,7 @@ def get_customer(...) -> Customer:
     return customers[client_id]  # Let CustomerNotFoundError propagate
 \`\`\`" \
   -f commit_id="$COMMIT_SHA" \
-  -f path="src/workstation_clustering/api.py" \
+  -f path="src/example/api.py" \
   -F line=74 \
   -f side="RIGHT"
 ```
@@ -298,10 +301,10 @@ def get_customer(...) -> Customer:
 gh api \
   --method POST \
   -H "Accept: application/vnd.github+json" \
-  /repos/imprivata-ai/workstation-clustering/pulls/<number>/comments \
+  /repos/$REPO/pulls/<number>/comments \
   -f body="..." \
   -f commit_id="$COMMIT_SHA" \
-  -f path="src/workstation_clustering/api.py" \
+  -f path="src/example/api.py" \
   -F start_line=74 \
   -f start_side="RIGHT" \
   -F line=90 \
@@ -310,7 +313,7 @@ gh api \
 
 **After submitting all inline comments, approve the PR:**
 ```bash
-gh pr review <number> --repo imprivata-ai/workstation-clustering --approve --body "✅ Reviewed with inline comments. Great work overall!"
+gh pr review <number> --repo $REPO --approve --body "✅ Reviewed with inline comments. Great work overall!"
 ```
 
 **If user says "no" or "adjust":**

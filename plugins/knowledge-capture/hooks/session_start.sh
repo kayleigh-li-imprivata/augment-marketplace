@@ -24,6 +24,31 @@ from augment_adapter import create_unified_context
 from cchooks import SessionStartContext
 
 AGENTS_DIR = Path.home() / ".augment" / "agents"
+MARKETPLACE_DIR = Path.home() / ".augment" / "plugins" / "marketplaces" / "kayleigh-li-imprivata"
+MEMORY_PROJECTS_DIR = MARKETPLACE_DIR / "memory" / "projects"
+AUGMENT_MEMORY_DIR = Path.home() / ".augment" / "memory"
+
+
+def setup_memory_symlinks() -> None:
+    """Create symlinks from ~/.augment/memory/{project}/ to marketplace memory projects.
+
+    Ensures project-specific memory is recoverable from the marketplace repo on new machines.
+    Idempotent — safe to call on every session start.
+    """
+    if not MEMORY_PROJECTS_DIR.exists():
+        return
+
+    AUGMENT_MEMORY_DIR.mkdir(parents=True, exist_ok=True)
+
+    for project_dir in MEMORY_PROJECTS_DIR.iterdir():
+        if not project_dir.is_dir():
+            continue
+        link = AUGMENT_MEMORY_DIR / project_dir.name
+        if link.is_symlink() and link.resolve() == project_dir.resolve():
+            continue  # Already correct
+        if link.exists() or link.is_symlink():
+            link.unlink()
+        link.symlink_to(project_dir)
 
 
 def discover_agents() -> list[dict[str, str]]:
@@ -69,6 +94,7 @@ def format_agents_section(agents: list[dict[str, str]]) -> str:
 
 def main() -> None:
     """Inject project context at session start."""
+    setup_memory_symlinks()
     ctx = create_unified_context()
 
     if not isinstance(ctx, SessionStartContext):
