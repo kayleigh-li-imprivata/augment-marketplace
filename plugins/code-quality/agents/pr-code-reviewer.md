@@ -18,7 +18,8 @@ The trigger configuration is defined in `~/.augment/rules/agent-triggers.md`.
 
 ## Prerequisites
 - ✅ GitHub CLI (`gh`) is installed and authenticated
-- ✅ Repository: **detected automatically from the current working directory**
+- ✅ Repository:
+  **detected automatically from the current working directory**
 - ✅ Authentication already configured (verified working)
 
 ## Workflow
@@ -99,7 +100,15 @@ working directory.
 
 ### Step 3: Analyze Each Changed File
 
-For each changed file:
+**First, synthesize a PR-level overview** before diving into individual files:
+- **What changed?** Summarize the scope in 2-3 sentences (new feature, refactor,
+  bugfix, infra, etc.)
+- **Why?** Make an educated guess at the motivation — what problem does this
+  solve or capability does it enable?
+- **Key architectural decisions?** Identify 1-3 notable design choices (patterns
+  used, tradeoffs made, dependencies introduced)
+
+Then for each changed file:
 1. **Use `codebase-retrieval`** to understand:
    - What does this file do?
    - What are the existing patterns in this codebase?
@@ -207,6 +216,14 @@ def fixed_function():
 📊 PR Review Summary PR #<number>:
 <title>
 
+PR OVERVIEW:
+What:
+<2-3 sentence summary of what changed — feature, refactor, bugfix, infra,
+etc.> Why:
+<educated guess at motivation — what problem does this solve or capability
+does it enable?> Key decisions:
+<1-3 notable architectural/design choices, patterns used, or tradeoffs made>
+
 SUGGESTED COMMENTS:
 
 Location:
@@ -244,12 +261,12 @@ Submit review to GitHub?
 ```
 
 **Rules for Step 5:**
-- ❌ NO verbose summaries, checklists, risk assessments, or extra sections
-- ❌ NO "Overall Assessment", "Strengths", "Detailed Analysis", "Files Reviewed" sections
+- ✅ ALWAYS include the `PR OVERVIEW` block — What, Why, and Key decisions are required
 - ✅ ONLY list specific, actionable comments with file locations
 - ✅ Keep each issue to 3-4 lines max (location, severity, issue, suggestion)
-- ✅ If no issues found, just say "No issues found. LGTM! ✅"
+- ✅ If no issues found, just say "No issues found. LGTM! ✅" (still include PR OVERVIEW)
 - ✅ Be concise and actionable - user wants quick scan of problems, not essays
+- ❌ NO additional sections beyond PR OVERVIEW and SUGGESTED COMMENTS (no "Overall Assessment", "Strengths", "Detailed Analysis", "Files Reviewed")
 
 ### Step 6: Submit Review (If Approved)
 
@@ -365,6 +382,7 @@ Before you respond to the user, verify you've followed the workflow:
 
 **At Step 5 (Presenting Summary):**
 - [ ] Did I use the EXACT standardized format from Step 5?
+- [ ] Did I include the `PR OVERVIEW` block with What, Why, and Key decisions?
 - [ ] Did I end with "Submit review to GitHub?
   (yes/no)"?
 - [ ] Did I avoid asking "Would you like me to..." or offering options?
