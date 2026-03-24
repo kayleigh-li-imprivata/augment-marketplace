@@ -219,41 +219,52 @@ Any of these phrases should trigger the issue resolver agent:
    - Creating descriptive PR with issue link
    - Removing analysis file after success
 
-## Memory Capture Agent
+## Marketplace Maintainer Agent
 
-When the user asks to save something to memory, automatically:
+When the user asks to update, create, or modify marketplace content (agents, rules, commands, skills, memory), automatically:
 1. Read
-   `~/.augment/plugins/marketplaces/kayleigh-li-imprivata/plugins/knowledge-capture/agents/memory-capture.md`
+   `~/.augment/plugins/marketplaces/kayleigh-li-imprivata/plugins/meta/agents/marketplace-maintainer.md`
 2. Follow all instructions in that file step-by-step
-3. Execute the complete memory capture workflow
+3. Execute the complete marketplace maintenance workflow
 
 ### Trigger Phrases
 
-Any of these phrases should trigger the memory capture agent:
-- "add what we discussed to global memory"
-- "add what we discussed to workstation-clustering memory"
-- "add to global memory"
+**Flexible triggers** - any mention of updating/creating/modifying marketplace content:
+- "update marketplace **code review** agent to check for type hints"
+- "create new marketplace agent for running tests"
+- "add what we discussed to marketplace memory"
+- "update marketplace to check for global linting rules when diagnosing ci failures"
+- "modify marketplace **linting** rules"
+- "add to global memory about ArgoCD patterns"
 - "add to workstation-clustering memory"
 - "capture this to memory"
 - "save this to memory"
+
+**Keywords:** "update marketplace", "create marketplace", "modify marketplace", "add to marketplace", "add to global memory", "add to {project} memory"
 
 ### Workflow
 
 1. **Read the agent instructions:**
    - Load
-     `~/.augment/plugins/marketplaces/kayleigh-li-imprivata/plugins/knowledge-capture/agents/memory-capture.md`
+     `~/.augment/plugins/marketplaces/kayleigh-li-imprivata/plugins/meta/agents/marketplace-maintainer.md`
    - Follow every step in the workflow section
 
-2. **Execute the capture:**
-   - Determine target store (global or project-specific)
-   - Summarize what will be captured and ask for confirmation
-   - Write the memory file with correct format and kebab-case naming
-   - Reindex basic-memory (global store only)
-   - Show git diff and ask for push approval
+2. **Execute the maintenance:**
+   - Read registries (agents.md, rules.md, memorized.md)
+   - Parse user intent and find ALL relevant files
+   - Recommend approach (update existing vs. create new)
+   - Get user confirmation
+   - Make changes to content files
+   - Update registries if needed
+   - Show git diff and ask for approval
    - Commit and push to marketplace
+   - Reindex (auggie + basic-memory if memory changed)
 
 3. **Never skip:**
-   - Asking for content confirmation before writing
-   - Reindexing after global memory writes
+   - Reading registries first
+   - Finding ALL relevant files (not just one)
+   - Recommending expand vs. create new
+   - Updating registries when content changes
    - Showing the diff before pushing
    - Asking for approval before committing/pushing
+   - Reindexing after push
