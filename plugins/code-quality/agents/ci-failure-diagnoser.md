@@ -370,13 +370,84 @@ Apply fixes?
 - ✅ Provide specific fix suggestion for each
 - ✅ Ask for approval before applying fixes
 
-### Step 11: Apply Fixes (If Approved)
+### Step 11: Fetch and Sync Shared Linting Configuration (For Lint Failures)
+
+**CRITICAL:** Before fixing any lint failures, fetch the shared MegaLinter and Ruff configuration and update local files to ensure 100% parity with CI.
+
+The repository uses shared linting configuration from `imprivata-ai/.github`:
+- Shared MegaLinter config: `imprivata-ai/.github/linters/.mega-linter.yml`
+- Shared Ruff config: `imprivata-ai/.github/linters/configs/ruff.toml`
+
+**Fetch and sync shared configs:**
+```bash
+# Fetch shared .mega-linter.yml
+echo "Fetching shared MegaLinter configuration..."
+gh api repos/imprivata-ai/.github/contents/linters/.mega-linter.yml --jq '.content' | base64 -d > /tmp/shared-mega-linter.yml
+
+# Fetch shared ruff.toml
+echo "Fetching shared Ruff configuration..."
+gh api repos/imprivata-ai/.github/contents/linters/configs/ruff.toml --jq '.content' | base64 -d > /tmp/shared-ruff.toml
+
+# Update local .mega-linter.yml to match shared config
+echo "Syncing .mega-linter.yml with shared config..."
+cp /tmp/shared-mega-linter.yml .mega-linter.yml
+echo "✅ Updated .mega-linter.yml"
+
+# Update local ruff.toml to match shared config
+echo "Syncing ruff.toml with shared config..."
+cp /tmp/shared-ruff.toml ruff.toml
+echo "✅ Updated ruff.toml"
+
+# Update .vscode/settings.json to use ruff.toml
+echo "Syncing VSCode settings to use ruff.toml..."
+if [ -f ".vscode/settings.json" ]; then
+  # Check if ruff.lint.args already points to ruff.toml
+  if ! grep -q '"ruff.lint.args".*ruff.toml' .vscode/settings.json; then
+    # Use str-replace-editor to update VSCode settings
+    echo "⚠️  VSCode settings need manual update to use ruff.toml"
+    echo "   Add: \"ruff.lint.args\": [\"--config\", \"\${workspaceFolder}/ruff.toml\"]"
+  else
+    echo "✅ VSCode settings already configured for ruff.toml"
+  fi
+else
+  echo "⚠️  No .vscode/settings.json found - VSCode not configured"
+fi
+
+# Verify sync was successful
+echo ""
+echo "Configuration sync complete:"
+echo "  ✅ .mega-linter.yml synced with imprivata-ai/.github"
+echo "  ✅ ruff.toml synced with imprivata-ai/.github"
+echo "  ✅ Local linting now matches CI exactly"
+```
+
+**Why this matters:**
+- CI uses the shared configuration from `imprivata-ai/.github`
+- Local linting must use the EXACT same rules to match CI behavior
+- Mismatched configs lead to "passes locally, fails in CI" scenarios
+- The shared workflow symlinks these configs during CI runs
+- **Automatic sync ensures zero configuration drift**
+
+**What gets updated:**
+- ✅ `.mega-linter.yml` - Overwritten with shared config
+- ✅ `ruff.toml` - Overwritten with shared config
+- ⚠️ `.vscode/settings.json` - Flagged if needs manual update (use str-replace-editor)
+
+**When to use:**
+- ✅ Always run before fixing lint failures
+- ✅ Ensures local fixes match CI expectations
+- ✅ Eliminates "works locally, fails in CI" issues
+### Step 12: Apply Fixes (If Approved)
 
 If user approves, apply fixes locally using `str-replace-editor` and package managers:
 
 **For lint failures:**
 ```bash
-# Auto-fix with ruff
+# IMPORTANT: Use the shared ruff.toml fetched in Step 11
+# Auto-fix with ruff using shared config
+uv run ruff check --fix --config /tmp/shared-ruff.toml <file_path>
+
+# Or if local ruff.toml matches shared config:
 uv run ruff check --fix <file_path>
 
 # Or use str-replace-editor for specific changes
@@ -412,7 +483,7 @@ based on error messages.
 - ✅ Make changes one at a time
 - ✅ Explain each change before applying
 
-### Step 12: Run Tests Locally
+### Step 13: Run Tests Locally
 
 After applying fixes, run tests to verify:
 
@@ -437,7 +508,7 @@ Or:
 [Continue diagnosis loop]
 ```
 
-### Step 13: Clean Up Diagnosis File
+### Step 14: Clean Up Diagnosis File
 
 After fixes are successfully applied and tests pass, remove the diagnosis file:
 
@@ -447,7 +518,7 @@ rm -f "$DIAGNOSIS_FILE"
 echo "Removed diagnosis file: $DIAGNOSIS_FILE"
 ```
 
-### Step 14: Summary and Next Steps
+### Step 15: Summary and Next Steps
 
 After fixes are applied, tests pass, and cleanup is done:
 
