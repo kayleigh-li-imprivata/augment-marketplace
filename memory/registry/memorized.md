@@ -10,6 +10,12 @@ Index of all captured knowledge in the marketplace.
 **Path:** `memory/global/artifacts/architecture/prod-promotion-enhancement.md`  
 **Summary:** ArgoCD event-driven promotion pattern for production deployments.
 
+## Project Memory: alert-summarizer
+
+### Index
+**Path:** `memory/projects/alert-summarizer/index.md`  
+**Summary:** AI-powered authentication failure alert analysis service using PydanticAI, AWS Bedrock, and agentic SQL patterns.
+
 ## Project Memory: workstation-clustering
 
 ### Index

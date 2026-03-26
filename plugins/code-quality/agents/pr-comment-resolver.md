@@ -24,8 +24,8 @@ require autonomous execution.
 ## Trigger Phrases
 
 Any of these phrases should trigger this agent:
-- "Address comments on PR #123"
-- "Address PR #123 comments"
+- "Address comments on PR 123"
+- "Address PR 123 comments"
 - "Address comments on PR 123"
 - "Resolve PR 123 comments"
 - "Resolve comments for PR 123"

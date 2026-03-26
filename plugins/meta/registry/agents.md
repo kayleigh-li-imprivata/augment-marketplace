@@ -34,13 +34,6 @@ Quick reference for all available agents in the marketplace.
 **Purpose:** Perform code refactoring while maintaining functionality and improving code quality.  
 **Triggers:** "refactor", "clean up code", "improve code structure"
 
-## Knowledge Capture Agents
-
-### Memory Capture
-**Path:** `plugins/knowledge-capture/agents/memory-capture.md`  
-**Purpose:** Capture architectural decisions, patterns, and project-specific knowledge into memory stores (global or project-specific), then commit and push to marketplace.  
-**Triggers:** "add to global memory", "add to {project} memory", "capture this to memory", "save this to memory"
-
 ## Ralph Workflow Agents
 
 ### Architect
