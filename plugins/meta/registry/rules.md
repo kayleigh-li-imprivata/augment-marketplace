@@ -18,7 +18,7 @@ Quick reference for all rules in the marketplace.
 
 ### Core Development Rules
 **Path:** `plugins/core/rules/core-development-rules.md`  
-**Purpose:** Fundamental development practices and workflows.
+**Purpose:** Fundamental development practices and workflows. Includes tool selection hierarchy (semantic tools required for code symbols), signature change completeness (find all callers + run pyright after any signature change), and MCP language server integration.
 
 ### Response Style Communication
 **Path:** `plugins/core/rules/response-style-communication.md`  

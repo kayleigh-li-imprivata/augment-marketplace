@@ -50,6 +50,12 @@ violations:
    Do NOT assume tools work on the current directory by default.
    See "Tool Behavior Verification" section below.
 
+9. **Signature Change Completeness (MANDATORY)**:
+   After changing ANY public method or function signature, use
+   `find_referencing_symbols` to find ALL callers and update them.
+   Run the project's type checker to verify no type errors before reporting complete.
+   See "Signature Change Completeness" section below.
+
 ---
 
 ## Tool Behavior Verification
@@ -145,6 +151,52 @@ Is the target a code symbol (class, function, variable, method)?
 - ❌ `grep -r "class ClassName"` or `ripgrep "def function_name"`
 - ❌ Text search for "all usages of" any code symbol
 - ❌ Justifying text search with "it's faster" or "it's simpler"
+
+
+## Signature Change Completeness
+
+### ⚠️ MANDATORY: Update All Callers After Signature Changes ⚠️
+
+**CRITICAL FAILURE** to leave broken callers after changing any public method,
+function, or class signature.
+
+**Applies to**: parameter additions/removals, renames, type changes, return
+type changes, and new required arguments.
+
+### Required Workflow
+
+After changing **any** public function/method signature:
+
+1. **Find all callers** using `find_referencing_symbols` on the changed symbol
+2. **Update every caller** — no exceptions, no deferred fixes
+3. **Find all implementations** using `find_implementations` if the symbol is
+   part of an interface or abstract class
+4. **Run the project's type checker** to verify no compilation errors remain.
+   Check project memory or `pyproject.toml` for the correct command.
+5. **Do not report the task as complete** until the type checker passes clean
+
+### MCP Language Server Tools
+
+The `language-server` MCP server provides LSP-backed tools that complement
+Augment's semantic tools:
+
+| Need | Tool |
+|------|------|
+| Precise symbol definition | `definition` (language-server MCP) |
+| All references to a symbol | `references` (language-server MCP) |
+| File diagnostics (errors) | `diagnostics` (language-server MCP) |
+| Rename across project | `rename_symbol` (language-server MCP) |
+| Augment's cross-file usages | `find_referencing_symbols` |
+| Interface implementations | `find_implementations` |
+
+Use **both** Augment semantic tools and the language-server MCP tools for
+confidence — they complement each other.
+
+### Prohibited Patterns
+
+- ❌ Changing a signature and only updating the definition file
+- ❌ Reporting "done" without running `pyright` after signature changes
+- ❌ Leaving `TODO: update callers` comments as a substitute for updating them
 
 ## Structured Thinking
 
