@@ -10,6 +10,12 @@ Index of all captured knowledge in the marketplace.
 **Path:** `memory/global/artifacts/architecture/prod-promotion-enhancement.md`  
 **Summary:** ArgoCD event-driven promotion pattern for production deployments.
 
+### Tooling Setup
+
+#### Grafana MCP Setup
+**Path:** `memory/global/artifacts/tooling/grafana-mcp-setup.md`  
+**Summary:** How to set up and run the Grafana MCP server against AWS Managed Grafana (ai-prod-amg). Requires sshuttle, GRAFANA_SERVICE_ACCOUNT_TOKEN env var, uvx mcp-grafana package, and a fresh auggie session. curl does not work directly — only the auggie MCP client works.
+
 ## Project Memory: alert-summarizer
 
 ### Index

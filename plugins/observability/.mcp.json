@@ -1,14 +1,13 @@
 {
   "mcpServers": {
     "grafana": {
-      "command": "npx",
+      "command": "uvx",
       "args": [
-        "-y",
-        "@grafana/mcp-grafana"
+        "mcp-grafana"
       ],
       "env": {
         "GRAFANA_URL": "${GRAFANA_URL}",
-        "GRAFANA_API_KEY": "${GRAFANA_API_KEY}"
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN}"
       }
     },
     "prometheus-nonprod": {
@@ -37,11 +36,11 @@
       "description": "Grafana instance URL (e.g., https://grafana.example.com)",
       "setup": "Get from your Grafana instance"
     },
-    "GRAFANA_API_KEY": {
+    "GRAFANA_SERVICE_ACCOUNT_TOKEN": {
       "type": "secret",
       "required": true,
-      "description": "Grafana API key with Viewer or Editor role",
-      "setup": "Create at Grafana > Configuration > API Keys"
+      "description": "Grafana service account token with Viewer or Editor role",
+      "setup": "Create at Grafana > Administration > Service Accounts"
     },
     "PROMETHEUS_NONPROD_URL": {
       "type": "url",

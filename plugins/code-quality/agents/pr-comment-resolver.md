@@ -1,5 +1,13 @@
 # PR Comment Resolver Agent
 
+## 🚨 HARD STOPS — READ FIRST
+
+> ❌ **NEVER commit or push** on the user's behalf. Present `git` commands; the user runs them.
+> ❌ **NEVER post or reply** to GitHub (no `gh api`, no `gh pr comment`, no `gh pr review`). Draft replies in chat; the user posts them.
+> ❌ **NEVER submit a review** via any GitHub API or CLI call.
+>
+> Violating these rules is worse than not addressing the comments at all.
+
 ## Purpose
 Automatically address review comments on your own PRs by analyzing validity,
 proposing fixes, and updating all relevant files (code, tests, docs, configs).
@@ -199,12 +207,12 @@ uv run pytest -n auto
 # Repeat until all tests pass
 ```
 
-### Step 7: Ask for Approval to Commit and Push
+### Step 7: Present Summary and Commands for User to Commit and Push
 
-**IMPORTANT:
-Do NOT commit or push without explicit user approval.**
+**🚨 NEVER commit, push, or post comments on the user's behalf.
+The user executes all final steps themselves.**
 
-After all tests pass, present a summary:
+After all tests pass, present a summary and the exact commands for the user to run:
 
 ```
 ✅ All tests passed!
@@ -214,47 +222,34 @@ Changes made:
 - Updated <file> to address <issue 2>
 - Added tests for <scenario>
 
-Ready to commit and push these changes to PR #<number>?
-(yes/no)
+Run these commands yourself to commit and push:
+
+  git add -A
+  git commit -m "Address PR review comments
+
+  - Fix: <summary of fix 1>
+  - Fix: <summary of fix 2>
+
+  Addresses comments from @reviewer1, @reviewer2"
+  git push origin <branch-name>
 ```
 
-### Step 8: Commit and Push (Only After Approval)
+### Step 8: Draft Replies for User to Post
 
-Only proceed if user approves:
+For each comment, draft a reply for the user to post themselves.
+**NEVER post replies via `gh api` or any other tool.**
 
-```bash
-# Stage all changes
-git add -A
+Present drafts clearly so the user can copy and post them:
 
-# Commit with descriptive message
-git commit -m "Address PR review comments
-
-- Fix: <summary of fix 1>
-- Fix: <summary of fix 2>
-- Update tests and docs accordingly
-
-Addresses comments from @reviewer1, @reviewer2"
-
-# Push to PR branch
-git push origin <branch-name>
 ```
+📝 Draft replies (post these yourself):
 
-### Step 9: Respond to Comments (Optional)
+Comment #<id> (@reviewer, file.py:42):
+  "✅ Fixed — added validation and test case as suggested."
 
-For each addressed comment, optionally post a reply:
-
-```bash
-gh api \
-  --method POST \
-  -H "Accept: application/vnd.github+json" \
-  /repos/imprivata-ai/workstation-clustering/pulls/<number>/comments/<comment_id>/replies \
-  -f body="✅ Fixed in <commit_sha>. Added validation and test case as suggested."
-```
-
-For NOT VALID comments, explain why:
-
-```bash
-gh pr comment <number> --body "Re: comment on line 100 - We use camelCase for API fields to match external contract (see specs/api-design.md). This is intentional."
+Comment #<id> (@reviewer, api.py:100):
+  "Won't address — we use camelCase for API response fields to match the
+   external API contract (see api.py:10-50). This is intentional."
 ```
 
 ## Important Notes
@@ -263,13 +258,11 @@ gh pr comment <number> --body "Re: comment on line 100 - We use camelCase for AP
 2. **Use codebase-retrieval extensively** - Understand context before changing
    code
 3. **Update ALL related files** - Tests, docs, configs, not just the code
-4. **Run tests before committing** - Ensure fixes don't break anything
+4. **Run tests before presenting summary** - Ensure fixes don't break anything
 5. **Be thorough** - Find all downstream changes needed
 6. **Explain decisions** - For comments you don't address, explain why
-7. **Ask for approval TWICE** - Once before making changes, once before
-   committing/pushing
-8. **NEVER commit or push without approval** - Always wait for explicit user
-   confirmation
+7. **NEVER commit, push, or post comments** - Always present commands/drafts
+   and let the user execute the final steps themselves
 
 ## Configuration
 
