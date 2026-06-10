@@ -270,3 +270,46 @@ When the user asks to update, create, or modify marketplace content (agents, rul
    - Showing the diff before pushing
    - Asking for approval before committing/pushing
    - Reindexing after push
+
+
+## Investigate Prod Memory
+
+When the user asks to investigate, diagnose, or check the production state of
+the workstation-clustering pipeline (or implies it), automatically:
+
+1. Load
+   `~/.augment/plugins/marketplaces/kayleigh-li-imprivata/memory/projects/workstation-clustering/INVESTIGATE_PROD.md`
+2. Also load (referenced by the above)
+   `~/.augment/plugins/marketplaces/kayleigh-li-imprivata/memory/global/artifacts/tooling/ai-env-access.md`
+3. Walk the preflight + diagnostic checklist in order BEFORE issuing any
+   prod-diagnostic commands
+
+### Trigger Phrases
+
+Any of these phrases (and close variants) should trigger this memory load:
+
+- "investigate prod"
+- "check prod"
+- "diagnose prod pipeline"
+- "is prod running"
+- "prod pipeline status"
+- "el camino prod"
+- "investigate the workstation-clustering prod"
+
+### Workflow
+
+1. **Load the memory files** listed above before any tool calls that touch the
+   prod cluster, S3, or AWS APIs.
+2. **Run preflight** from `ai-env-access.md`:
+   - Confirm GlobalProtect VPN is up
+   - Confirm sshuttle via `ai-prod-jumpbox-proxy` is running
+   - Confirm AWS SSO sessions for the prod accounts are active
+   - Confirm kubeconfig context points at the `ai-prod` cluster
+3. **Walk the diagnostic checklist** from `INVESTIGATE_PROD.md`:
+   - CronWorkflow schedules + last successful runs (Argo, `ai-prod` namespace)
+   - S3 artifact freshness in the prod data lake bucket
+   - Distinguish daily-update workflow vs one-off rename workflow
+   - Tenant lookups (client_id) before concluding "stale"
+4. **Never skip** the common-wrong-inferences callouts in
+   `INVESTIGATE_PROD.md` (format vs logic, daily ≠ rename, cron vs downstream
+   observation lag).
